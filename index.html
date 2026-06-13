@@ -890,43 +890,6 @@
 
 
     <script>
-        /* ── MÚSICA ──────────────────────────────────────── */
-        const audio     = document.getElementById('bg-music');
-        const musicBtn  = document.getElementById('music-btn');
-        const iconPlay  = document.getElementById('icon-play');
-        const iconPause = document.getElementById('icon-pause');
-        let isPlaying   = false;
-
-        function setPlaying(val) {
-            isPlaying = val;
-            iconPlay.style.display  = val ? 'none'  : 'block';
-            iconPause.style.display = val ? 'block' : 'none';
-            musicBtn.title = val ? 'Pausar música' : 'Reproducir música';
-        }
-
-        musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                setPlaying(false);
-            } else {
-                audio.play().then(() => setPlaying(true)).catch(() => {});
-            }
-        });
-
-        // Intento de autoplay al cargar; si el navegador lo bloquea, espera
-        // el primer clic del usuario.
-        window.addEventListener('load', () => {
-            audio.volume = 0.35;
-            audio.play()
-                .then(() => setPlaying(true))
-                .catch(() => {
-                    document.addEventListener('click', function tryPlay() {
-                        audio.play().then(() => setPlaying(true)).catch(() => {});
-                        document.removeEventListener('click', tryPlay);
-                    }, { once: true });
-                });
-        });
-
         /* ── CUENTA ATRÁS ────────────────────────────────── */
         const weddingDate = new Date('2026-10-11T13:00:00');
 

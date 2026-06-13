@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borja & Miriam · 11 de Octubre 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold:       #B8924A;
+            --gold-light: #D4B483;
+            --gold-dark:  #8B6914;
+            --cream:      #FDF8F2;
+            --cream-dark: #F5EDE0;
+            --text:       #2C2016;
+            --text-light: #6B5744;
+            --white:      #FFFFFF;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* ─── MUSIC BUTTON ──────────────────────────────── */
+        #music-btn {
+            position: fixed;
+            top: 1.25rem;
+            right: 1.25rem;
+            z-index: 1000;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(212,180,131,0.6);
+            background: rgba(44,32,22,0.65);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold-light);
+            transition: background 0.3s, transform 0.3s;
+        }
+        #music-btn:hover { background: rgba(184,146,74,0.35); transform: scale(1.08); }
+        #music-btn svg   { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* ─── HERO ──────────────────────────────────────── */
+        #hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: #2C2016;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('foto.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.45;
+            transition: opacity 0.5s;
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(44,32,22,0.25) 0%, rgba(44,32,22,0.65) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .hero-pretext {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-weight: 300;
+            letter-spacing: 0.45em;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeDown 1s ease 0.4s forwards;
+        }
+
+        .hero-names {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 12vw, 8rem);
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1;
+            margin-top: 0.75rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.7s forwards;
+        }
+        .hero-names .amp {
+            display: block;
+            font-size: 0.45em;
+            color: var(--gold-light);
+            font-style: italic;
+            margin: 0.15em 0;
+        }
+
+        .hero-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            color: var(--cream);
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1s forwards;
+        }
+
+        .hero-line {
+            width: 70px;
+            height: 1px;
+            background: var(--gold-light);
+            margin: 1.5rem auto 0;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.3s forwards;
+        }
+
+        .scroll-cue {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 2s forwards;
+        }
+        .scroll-cue span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.4em;
+            color: var(--gold-light);
+            text-transform: uppercase;
+        }
+        .scroll-arrow {
+            width: 20px;
+            height: 20px;
+            border-right: 1px solid var(--gold-light);
+            border-bottom: 1px solid var(--gold-light);
+            transform: rotate(45deg);
+            animation: arrowBounce 2s infinite;
+        }
+
+        /* ─── ORNAMENT ──────────────────────────────────── */
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem auto;
+        }
+        .ornament::before,
+        .ornament::after {
+            content: '';
+            flex: 1;
+            max-width: 80px;
+            height: 1px;
+            background: var(--gold);
+        }
+        .ornament-icon {
+            color: var(--gold);
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        /* ─── SECTIONS (shared) ─────────────────────────── */
+        section { padding: 5rem 2rem; }
+
+        .section-inner {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .tag {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.45em;
+            color: var(--gold);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        h2.section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 400;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        /* ─── COUNTDOWN ─────────────────────────────────── */
+        #countdown {
+            background: var(--text);
+            padding: 4.5rem 2rem;
+            text-align: center;
+        }
+        #countdown .tag         { color: var(--gold-light); }
+        #countdown h2           { color: var(--white); }
+
+        .cd-grid {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+            margin-top: 3rem;
+        }
+        .cd-item { text-align: center; }
+        .cd-num {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            color: var(--gold-light);
+            display: block;
+            line-height: 1;
+            min-width: 2.5ch;
+        }
+        .cd-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.35em;
+            color: var(--cream);
+            text-transform: uppercase;
+            display: block;
+            margin-top: 0.4rem;
+        }
+        .cd-sep {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--gold);
+            line-height: 1;
+            padding-top: 0.05em;
+        }
+
+        /* ─── INVITATION ────────────────────────────────── */
+        #invitation { text-align: center; }
+
+        .invite-body {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+            font-weight: 300;
+            line-height: 2;
+            color: var(--text-light);
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .invite-body strong { color: var(--gold-dark); font-weight: 500; }
+
+        .invite-sign {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text);
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        /* ─── SCHEDULE ──────────────────────────────────── */
+        #schedule { background: var(--cream-dark); }
+
+        .timeline {
+            margin-top: 3.5rem;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold-light) 10%, var(--gold-light) 90%, transparent);
+            transform: translateX(-50%);
+        }
+
+        .tl-item {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 3.5rem;
+        }
+        .tl-item:last-child { margin-bottom: 0; }
+
+        .tl-side {
+            flex: 1;
+            padding: 0 2rem;
+        }
+        .tl-item.right .tl-side-left  { order: 0; text-align: right; }
+        .tl-item.right .tl-side-right { order: 2; }
+        .tl-item.left  .tl-side-left  { order: 2; }
+        .tl-item.left  .tl-side-right { order: 0; text-align: right; }
+
+        .tl-dot {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 4px solid var(--cream-dark);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            z-index: 1;
+            order: 1;
+        }
+
+        .tl-time {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.35em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+        .tl-event {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin: 0.2rem 0 0.3rem;
+        }
+        .tl-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        /* ─── LOCATIONS ─────────────────────────────────── */
+        #locations { text-align: center; }
+
+        .loc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .loc-card {
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .loc-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(184,146,74,0.15);
+        }
+
+        .loc-emoji { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+        .loc-type {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+        .loc-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+            margin: 0.4rem 0 0.6rem;
+        }
+        .loc-addr {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.6rem 1.6rem;
+            border: 1px solid var(--gold);
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: background 0.3s, color 0.3s;
+        }
+        .btn-outline:hover { background: var(--gold); color: var(--white); }
+
+        /* ─── RSVP ──────────────────────────────────────── */
+        #rsvp {
+            background: linear-gradient(150deg, #2C2016 0%, #3D2E1E 50%, #2C2016 100%);
+            text-align: center;
+        }
+        #rsvp .tag           { color: var(--gold-light); }
+        #rsvp h2             { color: var(--white); }
+        #rsvp .invite-body   { color: rgba(255,255,255,0.68); margin-bottom: 3rem; }
+        #rsvp .invite-body strong { color: var(--gold-light); }
+
+        .btn-cta {
+            display: inline-block;
+            padding: 1rem 3.5rem;
+            background: var(--gold);
+            color: var(--white);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            letter-spacing: 0.25em;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 2px solid var(--gold);
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .btn-cta:hover { background: transparent; color: var(--gold-light); border-color: var(--gold-light); }
+
+        /* ─── BUS ───────────────────────────────────────── */
+        #bus { background: var(--cream-dark); text-align: center; }
+
+        .bus-card {
+            display: inline-flex;
+            align-items: center;
+            gap: 1.25rem;
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            padding: 1.75rem 2.5rem;
+            margin-top: 1.5rem;
+        }
+        .bus-emoji { font-size: 2.2rem; }
+        .bus-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold-dark);
+        }
+        .bus-desc { font-size: 0.9rem; color: var(--text-light); margin-top: 0.1rem; }
+
+        /* ─── CONTACT ───────────────────────────────────── */
+        #contact { text-align: center; }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            padding: 2rem 2.5rem;
+            min-width: 220px;
+        }
+        .contact-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--text);
+        }
+        .contact-role {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.35em;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin: 0.3rem 0 1.5rem;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.65rem 1.2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+            margin-bottom: 0.75rem;
+            border: 1px solid;
+        }
+        .contact-btn:last-child { margin-bottom: 0; }
+
+        .btn-call { border-color: var(--gold); color: var(--gold-dark); }
+        .btn-call:hover { background: var(--gold); color: var(--white); }
+
+        .btn-wa { border-color: #25D366; color: #1A9649; }
+        .btn-wa:hover { background: #25D366; color: var(--white); }
+
+        /* ─── GIFT ──────────────────────────────────────── */
+        #gift { background: var(--cream-dark); text-align: center; }
+
+        .gift-body {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--text-light);
+            line-height: 1.9;
+            max-width: 520px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .account-box {
+            display: inline-block;
+            background: var(--white);
+            border: 1px solid var(--gold-light);
+            padding: 1.75rem 3rem;
+        }
+        .account-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.4em;
+            color: var(--gold);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .account-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--text);
+            letter-spacing: 0.08em;
+        }
+        .copy-btn {
+            display: block;
+            margin: 1rem auto 0;
+            padding: 0.45rem 1.2rem;
+            border: 1px solid var(--gold-light);
+            background: none;
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .copy-btn:hover { background: var(--gold); color: var(--white); border-color: var(--gold); }
+
+        /* ─── FOOTER ────────────────────────────────────── */
+        footer {
+            background: var(--text);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .footer-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            color: var(--gold-light);
+            font-style: italic;
+        }
+        .footer-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82rem;
+            letter-spacing: 0.45em;
+            color: rgba(253,248,242,0.5);
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+        .footer-love {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem;
+            color: rgba(253,248,242,0.35);
+            margin-top: 2rem;
+        }
+
+        /* ─── ANIMATIONS ────────────────────────────────── */
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(18px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        @keyframes arrowBounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50%       { transform: rotate(45deg) translateY(7px); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s ease, transform 0.75s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ────────────────────────────────── */
+        @media (max-width: 620px) {
+            section { padding: 4rem 1.25rem; }
+
+            /* Timeline: single column left-aligned */
+            .timeline::before {
+                left: 26px;
+            }
+            .tl-item,
+            .tl-item.right,
+            .tl-item.left {
+                flex-direction: row !important;
+            }
+            .tl-dot { order: 0 !important; }
+            .tl-side-left,
+            .tl-side-right,
+            .tl-item.right .tl-side-left,
+            .tl-item.right .tl-side-right,
+            .tl-item.left  .tl-side-left,
+            .tl-item.left  .tl-side-right {
+                order: 1 !important;
+                text-align: left !important;
+                padding-right: 0 !important;
+            }
+            .tl-item .tl-side-right { display: none !important; }
+            .tl-dot { width: 40px; height: 40px; font-size: 1rem; }
+
+            .cd-sep { display: none; }
+            .bus-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background music: reemplaza musica.mp3 con tu archivo de audio -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ── Botón música ─────────────────────────────────── -->
+    <button id="music-btn" title="Reproducir / pausar música" aria-label="Reproducir música">
+        <!-- Icono nota musical (play) -->
+        <svg id="icon-play" viewBox="0 0 24 24">
+            <path d="M9 18V5l12-2v13" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+        </svg>
+        <!-- Icono pausa -->
+        <svg id="icon-pause" viewBox="0 0 24 24" style="display:none">
+            <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor" stroke="none"/>
+            <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor" stroke="none"/>
+        </svg>
+    </button>
+
+    <!-- ── HERO ─────────────────────────────────────────── -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-pretext">Nos casamos</p>
+            <h1 class="hero-names">
+                Borja
+                <span class="amp">&</span>
+                Miriam
+            </h1>
+            <p class="hero-date">11 · Octubre · 2026</p>
+            <div class="hero-line"></div>
+        </div>
+        <div class="scroll-cue">
+            <span>Descubre</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ── COUNTDOWN ────────────────────────────────────── -->
+    <section id="countdown">
+        <div class="section-inner">
+            <span class="tag reveal">Queda poco para el gran día</span>
+            <h2 class="section-title reveal">Cuenta atrás</h2>
+            <div class="cd-grid">
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-days">--</span>
+                    <span class="cd-label">Días</span>
+                </div>
+                <span class="cd-sep" aria-hidden="true">:</span>
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-hours">--</span>
+                    <span class="cd-label">Horas</span>
+                </div>
+                <span class="cd-sep" aria-hidden="true">:</span>
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-minutes">--</span>
+                    <span class="cd-label">Minutos</span>
+                </div>
+                <span class="cd-sep" aria-hidden="true">:</span>
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-seconds">--</span>
+                    <span class="cd-label">Segundos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── INVITACIÓN ────────────────────────────────────── -->
+    <section id="invitation">
+        <div class="section-inner" style="text-align:center">
+            <span class="tag reveal">Con toda la alegría de nuestros corazones</span>
+            <h2 class="section-title reveal">Os invitamos</h2>
+            <div class="ornament reveal"><span class="ornament-icon">✦</span></div>
+            <p class="invite-body reveal">
+                Junto a nuestras familias, tenemos el honor y la alegría de invitaros a
+                compartir con nosotros el día más especial de nuestras vidas.<br><br>
+                El próximo <strong>11 de octubre de 2026</strong>, nos uniremos en matrimonio
+                rodeados de las personas que más queremos. Vuestra presencia hará de este día
+                un momento aún más <strong>único e irrepetible</strong>.<br><br>
+                Os esperamos con los brazos abiertos para celebrar juntos el comienzo
+                de nuestra nueva vida como casados.
+            </p>
+            <div class="ornament reveal"><span class="ornament-icon">♡</span></div>
+            <p class="invite-sign reveal">Con todo nuestro amor,<br><strong>Borja &amp; Miriam</strong></p>
+        </div>
+    </section>
+
+    <!-- ── PROGRAMA ──────────────────────────────────────── -->
+    <section id="schedule">
+        <div class="section-inner">
+            <span class="tag reveal">El gran día</span>
+            <h2 class="section-title reveal">Programa</h2>
+            <div class="ornament reveal"><span class="ornament-icon">✦</span></div>
+
+            <div class="timeline">
+                <!-- Bus -->
+                <div class="tl-item right reveal">
+                    <div class="tl-side tl-side-left">
+                        <span class="tl-time">12:00 h</span>
+                        <p class="tl-event">Autobús</p>
+                        <p class="tl-desc">Salida hacia la iglesia</p>
+                    </div>
+                    <div class="tl-dot">🚌</div>
+                    <div class="tl-side tl-side-right"></div>
+                </div>
+
+                <!-- Ceremonia -->
+                <div class="tl-item left reveal">
+                    <div class="tl-side tl-side-right"></div>
+                    <div class="tl-dot">💍</div>
+                    <div class="tl-side tl-side-left">
+                        <span class="tl-time">13:00 h</span>
+                        <p class="tl-event">Ceremonia</p>
+                        <p class="tl-desc">Iglesia Santa María de Sagunto</p>
+                    </div>
+                </div>
+
+                <!-- Comida -->
+                <div class="tl-item right reveal">
+                    <div class="tl-side tl-side-left">
+                        <span class="tl-time">14:30 h</span>
+                        <p class="tl-event">Celebración</p>
+                        <p class="tl-desc">Comida en Alquería Mascarós, Burriana</p>
+                    </div>
+                    <div class="tl-dot">🥂</div>
+                    <div class="tl-side tl-side-right"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── LUGARES ───────────────────────────────────────── -->
+    <section id="locations">
+        <div class="section-inner">
+            <span class="tag reveal" style="display:block;text-align:center">Dónde nos encontramos</span>
+            <h2 class="section-title reveal" style="text-align:center">Los lugares</h2>
+            <div class="ornament reveal"><span class="ornament-icon">✦</span></div>
+
+            <div class="loc-grid">
+                <div class="loc-card reveal">
+                    <span class="loc-emoji">🚌</span>
+                    <span class="loc-type">Autobús · 12:00 h</span>
+                    <h3 class="loc-name">Punto de salida</h3>
+                    <p class="loc-addr">Salida del autobús<br>hacia la ceremonia</p>
+                    <a href="https://maps.app.goo.gl/5eE1hbpfXxWc9Y8y9" target="_blank" rel="noopener" class="btn-outline">Ver ubicación</a>
+                </div>
+                <div class="loc-card reveal">
+                    <span class="loc-emoji">⛪</span>
+                    <span class="loc-type">Ceremonia · 13:00 h</span>
+                    <h3 class="loc-name">Iglesia Santa María</h3>
+                    <p class="loc-addr">Sagunto<br>Valencia</p>
+                    <a href="https://maps.google.com/?q=Iglesia+Santa+Maria+Sagunto" target="_blank" rel="noopener" class="btn-outline">Ver en el mapa</a>
+                </div>
+                <div class="loc-card reveal">
+                    <span class="loc-emoji">🌿</span>
+                    <span class="loc-type">Celebración · 14:30 h</span>
+                    <h3 class="loc-name">Alquería Mascarós</h3>
+                    <p class="loc-addr">Burriana<br>Castellón</p>
+                    <a href="https://maps.google.com/?q=Alqueria+Mascaros+Burriana" target="_blank" rel="noopener" class="btn-outline">Ver en el mapa</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── CONFIRMACIÓN ──────────────────────────────────── -->
+    <section id="rsvp">
+        <div class="section-inner" style="text-align:center">
+            <span class="tag reveal">Confirmación de asistencia</span>
+            <h2 class="section-title reveal">¿Vendrás?</h2>
+            <div class="ornament reveal" style="--gold:var(--gold-light)">
+                <span class="ornament-icon" style="color:var(--gold-light)">✦</span>
+            </div>
+            <p class="invite-body reveal">
+                Por favor, confirma tu asistencia.
+                Rellena el formulario con tu respuesta, alergias o intolerancias alimentarias,
+                y si necesitas el autobús hacia la ceremonia.
+            </p>
+            <!-- Sustituye el href por tu enlace real de Google Forms -->
+            <a href="https://forms.google.com/" target="_blank" rel="noopener" class="btn-cta reveal">
+                Confirmar asistencia
+            </a>
+        </div>
+    </section>
+
+
+    <!-- ── CONTACTO ──────────────────────────────────────── -->
+    <section id="contact">
+        <div class="section-inner">
+            <span class="tag reveal" style="display:block;text-align:center">¿Tienes alguna pregunta?</span>
+            <h2 class="section-title reveal" style="text-align:center">Contacto</h2>
+            <div class="ornament reveal"><span class="ornament-icon">✦</span></div>
+            <div class="contact-grid">
+                <div class="contact-card reveal">
+                    <p class="contact-name">Borja</p>
+                    <p class="contact-role">Novio</p>
+                    <a href="tel:+34678295600" class="contact-btn btn-call">📞 678 29 56 00</a>
+                    <a href="https://wa.me/34678295600" target="_blank" rel="noopener" class="contact-btn btn-wa">💬 WhatsApp</a>
+                </div>
+                <div class="contact-card reveal">
+                    <p class="contact-name">Miriam</p>
+                    <p class="contact-role">Novia</p>
+                    <a href="tel:+34620754659" class="contact-btn btn-call">📞 620 75 46 59</a>
+                    <a href="https://wa.me/34620754659" target="_blank" rel="noopener" class="contact-btn btn-wa">💬 WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── REGALO ─────────────────────────────────────────── -->
+    <section id="gift">
+        <div class="section-inner" style="text-align:center">
+            <span class="tag reveal" style="display:block">Con mucho cariño</span>
+            <h2 class="section-title reveal">¿Nos quieres hacer un regalo?</h2>
+            <div class="ornament reveal"><span class="ornament-icon">✦</span></div>
+            <p class="gift-body reveal">
+                Vuestra presencia y vuestro cariño son el mejor regalo que podemos recibir.
+                Si aun así queréis hacernos un obsequio, os dejamos nuestro número de cuenta.
+                ¡Muchas gracias de corazón!
+            </p>
+            <div class="account-box reveal">
+                <span class="account-label">Número de cuenta</span>
+                <!-- Sustituye por el número de cuenta real -->
+                <span class="account-num" id="iban">ESXX XXXX XXXX XXXX XXXX XXXX</span>
+                <button class="copy-btn" onclick="copyIban()" aria-label="Copiar número de cuenta">
+                    Copiar número
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── FOOTER ─────────────────────────────────────────── -->
+    <footer>
+        <p class="footer-names">Borja &amp; Miriam</p>
+        <p class="footer-date">11 · Octubre · 2026</p>
+        <p class="footer-love">Hecho con amor ♡</p>
+    </footer>
+
+
+    <script>
+        /* ── MÚSICA ──────────────────────────────────────── */
+        const audio     = document.getElementById('bg-music');
+        const musicBtn  = document.getElementById('music-btn');
+        const iconPlay  = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        let isPlaying   = false;
+
+        function setPlaying(val) {
+            isPlaying = val;
+            iconPlay.style.display  = val ? 'none'  : 'block';
+            iconPause.style.display = val ? 'block' : 'none';
+            musicBtn.title = val ? 'Pausar música' : 'Reproducir música';
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                setPlaying(false);
+            } else {
+                audio.play().then(() => setPlaying(true)).catch(() => {});
+            }
+        });
+
+        // Intento de autoplay al cargar; si el navegador lo bloquea, espera
+        // el primer clic del usuario.
+        window.addEventListener('load', () => {
+            audio.volume = 0.35;
+            audio.play()
+                .then(() => setPlaying(true))
+                .catch(() => {
+                    document.addEventListener('click', function tryPlay() {
+                        audio.play().then(() => setPlaying(true)).catch(() => {});
+                        document.removeEventListener('click', tryPlay);
+                    }, { once: true });
+                });
+        });
+
+        /* ── CUENTA ATRÁS ────────────────────────────────── */
+        const weddingDate = new Date('2026-10-11T13:00:00');
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        function tick() {
+            const diff = weddingDate - new Date();
+            if (diff <= 0) {
+                ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id => {
+                    document.getElementById(id).textContent = '00';
+                });
+                return;
+            }
+            document.getElementById('cd-days').textContent    = pad(Math.floor(diff / 86400000));
+            document.getElementById('cd-hours').textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+            document.getElementById('cd-minutes').textContent = pad(Math.floor((diff % 3600000) / 60000));
+            document.getElementById('cd-seconds').textContent = pad(Math.floor((diff % 60000) / 1000));
+        }
+        tick();
+        setInterval(tick, 1000);
+
+        /* ── SCROLL REVEAL ───────────────────────────────── */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* ── COPIAR IBAN ─────────────────────────────────── */
+        function copyIban() {
+            const iban = document.getElementById('iban').textContent;
+            navigator.clipboard.writeText(iban).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const original = btn.textContent;
+                btn.textContent = '¡Copiado!';
+                setTimeout(() => { btn.textContent = original; }, 2500);
+            }).catch(() => {
+                /* fallback si clipboard API no disponible */
+                alert('Número de cuenta: ' + iban);
+            });
+        }
+    </script>
+</body>
+</html>

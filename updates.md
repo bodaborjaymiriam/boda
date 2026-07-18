@@ -1,0 +1,1 @@
+- Cambiar tonalidad a les imatges

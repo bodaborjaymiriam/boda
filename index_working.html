@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borja & Miriam · 11 de Octubre 2026</title>
+    <title>Miriam & Borja · 11 de Octubre 2026</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='85'>💍</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +35,7 @@
             --cream: #FFFFFF;
             --cream-soft: #FAF7F1;
             --white: #FFFFFF;
+            --peach: #F0B18A;
         }
 
         html {
@@ -43,7 +44,7 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--cream);
+            background: var(--cream-soft);
             color: var(--navy);
             overflow-x: hidden;
         }
@@ -86,192 +87,54 @@
         /* ─── HERO ──────────────────────────────────────── */
         #hero {
             position: relative;
-            height: 100vh;
-            min-height: 600px;
-            display: flex;
-            overflow: hidden;
-            background: var(--cream);
+            width: 100%;
             padding: 0;
             margin: 0;
-        }
-
-        .hero-photo-col {
-            flex: 1 1 50%;
-            position: relative;
             overflow: hidden;
+            aspect-ratio: 2000 / 1409;
         }
 
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('imgs/foto.png');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .hero-info-col {
-            flex: 1 1 50%;
-            position: relative;
-            z-index: 2;
-            background: var(--cream);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 3rem 3rem;
-        }
-
-        /* Wavy line-art divider between photo and info panel */
-        .hero-curve {
-            position: absolute;
-            top: 0;
-            left: 0;
-            transform: translateX(-99%);
-            width: clamp(90px, 11vw, 220px);
-            height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        .hero-curve svg {
+        .hero-bg-img {
             display: block;
-            width: 100%;
-            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: calc(100% * 1409 / 2000);
+            height: calc(100% * 2000 / 1409);
+            max-width: none;
+            transform: translate(-50%, -50%) rotate(90deg);
         }
 
         .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-corner {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: clamp(120px, 16vw, 220px);
-            height: auto;
-            z-index: 3;
-            pointer-events: none;
-            zoom: 200%;
-        }
-
-        .hero-pretext {
-            font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.75rem, 2vw, 0.9rem);
-            font-weight: 500;
-            letter-spacing: 0.45em;
-            color: var(--orange);
-            text-transform: uppercase;
-            opacity: 0;
-            animation: fadeDown 1s ease 0.4s forwards;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            width: 100%;
+            padding: 0 1.5rem;
         }
 
         .hero-names {
             font-family: 'Parisienne', cursive;
-            font-size: clamp(3.2rem, 8vw, 6rem);
+            font-size: clamp(2.6rem, 7vw, 5.2rem);
             font-weight: 400;
             color: var(--navy);
             line-height: 1.05;
-            margin-top: 0.5rem;
-            opacity: 0;
-            animation: fadeUp 1s ease 0.7s forwards;
         }
 
         .hero-names .amp {
-            display: block;
-            font-size: 0.5em;
             color: var(--orange);
-            margin: -0.1em 0;
         }
 
         .hero-date {
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+            font-size: clamp(0.75rem, 2vw, 1rem);
             font-weight: 400;
-            letter-spacing: 0.35em;
+            letter-spacing: 0.18em;
             color: var(--navy-soft);
-            margin-top: 1.5rem;
-            opacity: 0;
-            animation: fadeUp 1s ease 1s forwards;
-        }
-
-        .hero-line {
-            width: 70px;
-            height: 1px;
-            background: var(--orange);
-            margin: 1.5rem auto 0;
-            opacity: 0;
-            animation: fadeIn 1s ease 1.3s forwards;
-        }
-
-        .scroll-cue {
-            position: absolute;
-            bottom: 2rem;
-            left: 75%;
-            transform: translateX(-50%);
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.6rem;
-            opacity: 0;
-            animation: fadeIn 1s ease 2s forwards;
-        }
-
-        .scroll-cue span {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 500;
-            letter-spacing: 0.4em;
-            color: var(--navy-soft);
-            text-transform: uppercase;
-        }
-
-        .scroll-arrow {
-            width: 20px;
-            height: 20px;
-            border-right: 1px solid var(--navy-soft);
-            border-bottom: 1px solid var(--navy-soft);
-            transform: rotate(45deg);
-            animation: arrowBounce 2s infinite;
-        }
-
-        @media (max-width: 780px) {
-            #hero {
-                flex-direction: column;
-                height: auto;
-                min-height: auto;
-            }
-
-            .hero-photo-col {
-                flex: none;
-                height: 46vh;
-                min-height: 300px;
-            }
-
-            .hero-info-col {
-                flex: none;
-                padding: 3.5rem 1.5rem 4.5rem;
-            }
-
-            .hero-curve {
-                display: none;
-            }
-
-            .hero-info-col::before {
-                content: '';
-                position: absolute;
-                top: -42px;
-                left: -5%;
-                right: -5%;
-                height: 84px;
-                background: var(--cream);
-                border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-            }
-
-            .scroll-cue {
-                left: 50%;
-            }
+            margin-top: 0.75rem;
         }
 
         /* ─── ORNAMENT (line-art) ───────────────────────── */
@@ -318,26 +181,6 @@
             height: clamp(50px, 8vw, 110px);
         }
 
-        .wave-divider--countdown {
-            z-index: 5;
-            overflow: visible;
-        }
-
-        .wave-divider--countdown .countdown-frame {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: clamp(240px, 30vw, 320px);
-            z-index: 6;
-        }
-
-        @media (max-width: 620px) {
-            .wave-divider--countdown .countdown-frame {
-                width: clamp(200px, 60vw, 280px);
-            }
-        }
-
         /* ─── SECTIONS (shared) ─────────────────────────── */
         section {
             padding: 5rem 2rem;
@@ -370,54 +213,15 @@
 
         /* ─── COUNTDOWN ─────────────────────────────────── */
         #countdown {
-            background: var(--cream-soft);
-            min-height: clamp(120px, 18vw, 200px);
-            padding: 0 2rem;
             text-align: center;
         }
 
-        .countdown-frame {
-            position: relative;
-            width: 100%;
-            max-width: 440px;
-            margin: 0 auto;
-        }
-
-        #coundown_concha {
-            width: 100%;
-        }
-
-        #coundown_concha img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        #coundown_countdown {
-            position: absolute;
-            top: 38%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 74%;
-        }
-
-        #coundown_countdown .tag {
-            font-size: 0.62rem;
-            letter-spacing: 0.25em;
-            margin-bottom: 0.4rem;
-        }
-
-        #coundown_countdown h2.section-title {
-            font-size: clamp(1.1rem, 4vw, 1.5rem);
-        }
-
-        .cd-grid {
+        .cd-row {
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            justify-content: space-around;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 0.5rem 0.8rem;
-            margin-top: 1.1rem;
+            gap: 1.5rem;
         }
 
         .cd-item {
@@ -426,7 +230,7 @@
 
         .cd-num {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(1.3rem, 4vw, 1.9rem);
+            font-size: clamp(2.4rem, 6vw, 4rem);
             color: var(--orange);
             display: block;
             line-height: 1;
@@ -435,21 +239,44 @@
 
         .cd-label {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.55rem;
+            font-size: 0.7rem;
             font-weight: 500;
             letter-spacing: 0.2em;
             color: var(--navy-soft);
             text-transform: uppercase;
             display: block;
-            margin-top: 0.3rem;
+            margin-top: 0.4rem;
         }
 
-        .cd-sep {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: var(--navy-pale);
-            line-height: 1;
-            padding-top: 0.05em;
+        .cd-lower {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 3.5rem;
+            text-align: center;
+        }
+
+        .cd-lower-text {
+            flex: 1 1 260px;
+        }
+
+        .cd-lower-img {
+            flex: 1 1 260px;
+            max-width: 340px;
+        }
+
+        .cd-lower-img img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        @media (max-width: 620px) {
+            .cd-lower {
+                flex-direction: column;
+            }
         }
 
         /* ─── INVITATION ────────────────────────────────── */
@@ -480,10 +307,6 @@
         }
 
         /* ─── SCHEDULE ──────────────────────────────────── */
-        #schedule {
-            background: var(--cream-soft);
-        }
-
         .timeline {
             margin-top: 3.5rem;
             position: relative;
@@ -535,8 +358,8 @@
         }
 
         .tl-dot {
-            width: 52px;
-            height: 52px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             background: var(--navy);
             border: 4px solid var(--cream-soft);
@@ -573,22 +396,44 @@
             line-height: 1.5;
         }
 
+        .tl-img {
+            display: block;
+            width: 100%;
+            max-width: 180px;
+            height: auto;
+            margin: 0 auto;
+        }
+
         /* ─── LOCATIONS ─────────────────────────────────── */
         #locations {
             text-align: center;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        #locations .section-inner {
+            max-width: none;
+            width: 100%;
+            margin: 0;
         }
 
         .loc-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            width: 100%;
             margin-top: 3rem;
+            background-image: url('imgs/background2.png');
+            background-size: auto 100%;
+            background-repeat: repeat-x;
+            background-position: left center;
+            padding: 2rem 2rem;
         }
 
         .loc-card {
-            background: var(--white);
-            border: 1px solid var(--navy-pale);
-            padding: 2.5rem 2rem;
+            background: var(--cream-soft);
+            border: 1px solid var(--peach);
+            padding: 1.75rem 1rem;
             text-align: center;
             transition: transform 0.3s, border-color 0.3s;
         }
@@ -600,16 +445,27 @@
 
         #img_esglesia {
             width: 200px;
-
+            max-width: 100%;
+            height: auto;
         }
 
         #img_mascaros {
             width: 200px;
-
+            max-width: 100%;
+            height: auto;
         }
 
         #img_bus {
             width: 200px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .bus-btn-grid {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .loc-emoji {
@@ -647,7 +503,8 @@
             display: inline-block;
             padding: 0.65rem 1.6rem;
             border: 1px solid var(--navy);
-            background: var(--white);
+            border-radius: 999px;
+            background: transparent;
             color: var(--navy);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.78rem;
@@ -666,7 +523,6 @@
 
         /* ─── RSVP ──────────────────────────────────────── */
         #rsvp {
-            background: linear-gradient(150deg, #16223D 0%, var(--navy) 50%, #16223D 100%);
             text-align: center;
         }
 
@@ -675,50 +531,51 @@
         }
 
         #rsvp h2 {
-            color: var(--white);
+            color: var(--navy);
         }
 
         #rsvp .ornament {
-            color: var(--sky);
+            color: var(--navy);
         }
 
         #rsvp .ornament::before,
         #rsvp .ornament::after {
-            background: rgba(255, 255, 255, 0.25);
+            background: var(--navy-pale);
         }
 
         #rsvp .ornament-icon {
-            color: var(--sky);
+            color: var(--navy);
         }
 
         #rsvp .invite-body {
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--navy-soft);
             margin-bottom: 3rem;
         }
 
         #rsvp .invite-body strong {
-            color: var(--white);
+            color: var(--navy);
         }
 
         .btn-cta {
             display: inline-block;
             padding: 1rem 3.5rem;
-            background: var(--white);
-            color: var(--navy);
+            background: var(--peach);
+            color: var(--white);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
             letter-spacing: 0.2em;
             text-decoration: none;
             text-transform: uppercase;
-            border: 1px solid var(--white);
+            border: 1px solid var(--orange);
+            border-radius: 999px;
             transition: background 0.3s, color 0.3s, border-color 0.3s;
         }
 
         .btn-cta:hover {
-            background: var(--orange);
+            background: var(--orange-dark);
             color: var(--white);
-            border-color: var(--orange);
+            border-color: var(--orange-dark);
         }
 
         /* ─── BUS ───────────────────────────────────────── */
@@ -768,8 +625,8 @@
         }
 
         .contact-card {
-            background: var(--white);
-            border: 1px solid var(--navy-pale);
+            background: transparent;
+            border: 1px solid var(--peach);
             padding: 2rem 2.5rem;
             min-width: 220px;
         }
@@ -805,7 +662,8 @@
             transition: background 0.3s, color 0.3s, border-color 0.3s;
             margin-bottom: 0.75rem;
             border: 1px solid;
-            background: var(--white);
+            border-radius: 999px;
+            background: transparent;
         }
 
         .contact-btn:last-child {
@@ -834,7 +692,6 @@
 
         /* ─── GIFT ──────────────────────────────────────── */
         #gift {
-            background: var(--cream-soft);
             text-align: center;
         }
 
@@ -850,8 +707,8 @@
 
         .account-box {
             display: inline-block;
-            background: var(--white);
-            border: 1px solid var(--navy-pale);
+            background: transparent;
+            border: 1px solid var(--peach);
             padding: 1.75rem 3rem;
         }
 
@@ -878,7 +735,8 @@
             margin: 1rem auto 0;
             padding: 0.5rem 1.2rem;
             border: 1px solid var(--navy);
-            background: var(--white);
+            border-radius: 999px;
+            background: transparent;
             color: var(--navy);
             font-family: 'Montserrat', sans-serif;
             font-size: 0.75rem;
@@ -969,9 +827,25 @@
             margin-bottom: 1.5rem;
         }
 
+        /* ─── FOTO PAREJA ───────────────────────────────── */
+        #couple-photo {
+            text-align: center;
+        }
+
+        .couple-photo-img {
+            display: block;
+            width: 100%;
+            max-width: 520px;
+            height: auto;
+            margin: 0 auto;
+            object-fit: cover;
+            border-radius: 300px 300px 24px 24px;
+            box-shadow: 0 18px 45px rgba(27, 42, 74, 0.15);
+            border: 1px solid var(--peach);
+        }
+
         /* ─── FOOTER ────────────────────────────────────── */
         footer {
-            background: var(--navy);
             padding: 3rem 2rem;
             text-align: center;
         }
@@ -979,7 +853,7 @@
         .footer-names {
             font-family: 'Parisienne', cursive;
             font-size: 2.1rem;
-            color: var(--white);
+            color: var(--navy);
         }
 
         .footer-date {
@@ -987,7 +861,7 @@
             font-size: 0.72rem;
             font-weight: 500;
             letter-spacing: 0.4em;
-            color: var(--sky);
+            color: var(--navy-soft);
             text-transform: uppercase;
             margin-top: 0.6rem;
         }
@@ -996,7 +870,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 0.85rem;
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.35);
+            color: rgba(27, 42, 74, 0.45);
             margin-top: 2rem;
         }
 
@@ -1064,44 +938,30 @@
                 padding: 4rem 1.25rem;
             }
 
-            /* Timeline: single column left-aligned */
-            .timeline::before {
-                left: 26px;
+            /* Timeline: se mantienen las dos columnas, más compactas */
+            .tl-side {
+                padding: 0 0.75rem;
             }
 
-            .tl-item,
-            .tl-item.right,
-            .tl-item.left {
-                flex-direction: row !important;
+            .tl-event {
+                font-size: 1.05rem;
             }
 
-            .tl-dot {
-                order: 0 !important;
+            .tl-desc {
+                font-size: 0.8rem;
             }
 
-            .tl-side-left,
-            .tl-side-right,
-            .tl-item.right .tl-side-left,
-            .tl-item.right .tl-side-right,
-            .tl-item.left .tl-side-left,
-            .tl-item.left .tl-side-right {
-                order: 1 !important;
-                text-align: left !important;
-                padding-right: 0 !important;
-            }
-
-            .tl-item .tl-side-right {
-                display: none !important;
+            .tl-img {
+                max-width: 110px;
             }
 
             .tl-dot {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
+                width: 20px;
+                height: 20px;
             }
 
-            .cd-sep {
-                display: none;
+            .loc-grid {
+                grid-template-columns: 1fr;
             }
 
             .bus-card {
@@ -1136,79 +996,19 @@
 
     <!-- ── HERO ─────────────────────────────────────────── -->
     <section id="hero">
-        <img class="hero-corner" src="imgs/esquina.png" alt="">
-        <div class="hero-photo-col">
-            <div class="hero-bg"></div>
-        </div>
-        <div class="hero-info-col">
-            <div class="hero-curve" aria-hidden="true">
-                <svg viewBox="0 0 100 1000" preserveAspectRatio="none">
-                    <path d="M100,0
-                             C30,160 30,840 100,1000
-                             L100,1000 Z" fill="#FFFFFF" />
-                </svg>
-            </div>
-            <div class="hero-content">
-                <p class="hero-pretext">Nos casamos</p>
-                <h1 class="hero-names">
-                    Borja
-                    <span class="amp">&amp;</span>
-                    Miriam
-                </h1>
-                <p class="hero-date">11 · Octubre · 2026</p>
-                <div class="hero-line"></div>
-            </div>
+        <img class="hero-bg-img" src="imgs/background.png" alt="">
+        <div class="hero-content">
+            <h1 class="hero-names">Miriam <span class="amp">&amp;</span> Borja</h1>
+            <p class="hero-date">11 de Octubre de 2026</p>
         </div>
     </section>
 
-    <!-- ── DIVISOR ONDULADO: hero → countdown (con la cuenta atrás flotando encima) ── -->
-    <div class="wave-divider wave-divider--countdown" aria-hidden="true">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="#FAF7F1" />
-        </svg>
-        <div class="countdown-frame">
-            <div id="coundown_concha">
-                <img src="imgs/concha.png" alt="">
-            </div>
-            <div id="coundown_countdown" class="section-inner">
-                <span class="tag reveal">Queda poco</span>
-                <h2 class="section-title reveal">Cuenta atrás</h2>
-                <div class="cd-grid">
-                    <div class="cd-item">
-                        <span class="cd-num" id="cd-days">--</span>
-                        <span class="cd-label">Días</span>
-                    </div>
-                    <span class="cd-sep" aria-hidden="true">:</span>
-                    <div class="cd-item">
-                        <span class="cd-num" id="cd-hours">--</span>
-                        <span class="cd-label">Horas</span>
-                    </div>
-                    <span class="cd-sep" aria-hidden="true">:</span>
-                    <div class="cd-item">
-                        <span class="cd-num" id="cd-minutes">--</span>
-                        <span class="cd-label">Min</span>
-                    </div>
-                    <span class="cd-sep" aria-hidden="true">:</span>
-                    <div class="cd-item">
-                        <span class="cd-num" id="cd-seconds">--</span>
-                        <span class="cd-label">Seg</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ── COUNTDOWN (espaciador con el mismo fondo, deja aire bajo la cuenta atrás) ── -->
-    <section id="countdown"></section>
-
-    <!-- ── DIVISOR ONDULADO: countdown → invitación ── -->
+    <!-- ── DIVISOR ONDULADO: hero → invitación ── -->
     <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="#FFFFFF" />
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
     </div>
 
@@ -1229,12 +1029,8 @@
                 </span>
             </div>
             <p class="invite-body reveal">
-                Y no imaginamos celebrarlo sin las personas que formáis parte de nuestra vida. Por eso, nos hace
-                muchísima ilusión invitaros a compartir este día con nosotros. Os esperamos junto a nuestros padres el
-                11 de octubre de 2026.
+                Y nos hace mucha ilusión compartirlo con las personas que formáis parte de nuestra vida.
             </p>
-            <!--<p class="invite-body reveal">Gracias por acompañarnos.</p>-->
-            <span class="tag reveal">¡Tenemos muchas ganas de celebrarlo juntos!</span>
             <div class="ornament reveal">
                 <span class="ornament-icon" aria-hidden="true">
                     <svg viewBox="0 0 32 28" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"
@@ -1244,25 +1040,24 @@
                 </span>
             </div>
             <!--<p class="invite-sign reveal">Con todo nuestro amor, Borja &amp; Miriam</p>-->
-            <p class="invite-sign reveal">Gracias por acompañarnos.</p>
+            <p class="invite-body reveal">Qué ganas de celebrarlo juntos</p>
         </div>
     </section>
 
     <!-- ── DIVISOR ONDULADO: invitación → programa ── -->
     <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="#FAF7F1" />
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
     </div>
 
     <!-- ── PROGRAMA ──────────────────────────────────────── -->
     <section id="schedule">
         <div class="section-inner">
-            <span class="tag reveal">El gran día</span>
-            <h2 class="section-title reveal">Programa</h2>
-            <div class="ornament reveal">
+            <h2 class="section-title reveal" style="text-align: center;">Itinerario</h2>
+            <!--<div class="ornament reveal">
                 <span class="ornament-icon" aria-hidden="true">
                     <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -1272,43 +1067,70 @@
                         <path d="M16 21 C12 19 8 19 6 23 C10 25 13 24 16 21Z" />
                     </svg>
                 </span>
-            </div>
+            </div>-->
 
             <div class="timeline">
-                <!-- Bus -->
+                <!-- 1. Autobús -->
                 <div class="tl-item right reveal">
                     <div class="tl-side tl-side-left">
-                        <!--<span class="tl-time">12:00 h</span>-->
+                        <span class="tl-time">11:00h</span>
                         <p class="tl-event">Autobús</p>
-                        <p class="tl-desc">Salida de Onda a las 11:00</p>
-                        <p class="tl-desc">Salida de Betxí a las 11:15</p>
-                        <p class="tl-desc">Salida de Valencia a las 11:00</p>
-
+                        <p class="tl-desc">(Aprox)</p>
                     </div>
-                    <div class="tl-dot">🚌</div>
-                    <div class="tl-side tl-side-right"></div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-side tl-side-right">
+                        <img class="tl-img" src="imgs/program1.png" alt="Autobús">
+                    </div>
                 </div>
 
-                <!-- Ceremonia -->
+                <!-- 2. Ceremonia -->
                 <div class="tl-item left reveal">
-                    <div class="tl-side tl-side-right"></div>
-                    <div class="tl-dot">💍</div>
+                    <div class="tl-side tl-side-right">
+                        <img class="tl-img" src="imgs/program2.png" alt="Ceremonia">
+                    </div>
+                    <div class="tl-dot"></div>
                     <div class="tl-side tl-side-left">
-                        <span class="tl-time">13:00 h</span>
+                        <span class="tl-time">12:00h</span>
                         <p class="tl-event">Ceremonia</p>
-                        <p class="tl-desc">Iglesia Santa María de Sagunto</p>
+                        <p class="tl-desc">Iglesia Santa María, Sagunto</p>
                     </div>
                 </div>
 
-                <!-- Comida -->
+                <!-- 3. Autobús -->
                 <div class="tl-item right reveal">
                     <div class="tl-side tl-side-left">
-                        <span class="tl-time">14:30 h</span>
-                        <p class="tl-event">Celebración</p>
-                        <p class="tl-desc">Comida en Alquería Mascarós, Burriana</p>
+                        <span class="tl-time">13:30h</span>
+                        <p class="tl-event">Autobús</p>
                     </div>
-                    <div class="tl-dot">🥂</div>
-                    <div class="tl-side tl-side-right"></div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-side tl-side-right">
+                        <img class="tl-img" src="imgs/program6.png" alt="Autobús">
+                    </div>
+                </div>
+
+                <!-- 4. Comida -->
+                <div class="tl-item left reveal">
+                    <div class="tl-side tl-side-right">
+                        <img class="tl-img" src="imgs/program4.png" alt="Comida">
+                    </div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-side tl-side-left">
+                        <span class="tl-time">14:00h</span>
+                        <p class="tl-event">Comida</p>
+                        <p class="tl-desc">Alquería Mascarós, Burriana</p>
+                    </div>
+                </div>
+
+                <!-- 5. Fiesta -->
+                <div class="tl-item right reveal">
+                    <div class="tl-side tl-side-left">
+                        <span class="tl-time">18:00h</span>
+                        <p class="tl-event">Fiesta</p>
+                    </div>
+                    <div class="tl-dot"></div>
+                    <div class="tl-side tl-side-right">
+                        <img class="tl-img" src="imgs/program5.png" alt="Fiesta">
+                    </div>
                 </div>
             </div>
         </div>
@@ -1317,16 +1139,15 @@
     <!-- ── DIVISOR ONDULADO: programa → lugares ── -->
     <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="#FFFFFF" />
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
     </div>
 
     <!-- ── LUGARES ───────────────────────────────────────── -->
     <section id="locations">
         <div class="section-inner">
-            <span class="tag reveal" style="display:block;text-align:center">Dónde nos encontramos</span>
             <h2 class="section-title reveal" style="text-align:center">Los lugares</h2>
             <div class="ornament reveal">
                 <span class="ornament-icon" aria-hidden="true">
@@ -1344,16 +1165,20 @@
                 <div class="loc-card reveal">
                     <!--<span class="loc-emoji">🚌</span>-->
                     <img id="img_bus" src="imgs/bus.png" alt="">
-                    <span class="loc-type">Autobús · 12:00 h</span>
+                    <span class="loc-type">Autobús · 11:00 h</span>
                     <h3 class="loc-name">Punto de salida</h3>
                     <p class="loc-addr">Salida del autobús<br>hacia la ceremonia</p>
-                    <a href="https://maps.app.goo.gl/5eE1hbpfXxWc9Y8y9" target="_blank" rel="noopener"
-                        class="btn-outline">Ver ubicación</a>
+                    <div class="bus-btn-grid">
+                        <a href="#" class="btn-outline">Valencia</a>
+                        <a href="#" class="btn-outline">Betxí</a>
+                        <a href="#" class="btn-outline">Onda</a>
+                        <a href="#" class="btn-outline">Sagunto</a>
+                    </div>
                 </div>
                 <div class="loc-card reveal">
                     <!--<span class="loc-emoji">⛪</span>-->
                     <img id="img_esglesia" src="imgs/esglesia.png" alt="">
-                    <span class="loc-type">Ceremonia · 13:00 h</span>
+                    <span class="loc-type">Ceremonia · 12:00 h</span>
                     <h3 class="loc-name">Iglesia Santa María</h3>
                     <p class="loc-addr">Sagunto<br>Valencia</p>
                     <a href="https://maps.google.com/?q=Iglesia+Santa+Maria+Sagunto" target="_blank" rel="noopener"
@@ -1362,7 +1187,7 @@
                 <div class="loc-card reveal">
                     <!--<span class="loc-emoji">🌿</span>-->
                     <img id="img_mascaros" src="imgs/mascaros.png" alt="">
-                    <span class="loc-type">Celebración · 14:30 h</span>
+                    <span class="loc-type">Celebración · 14:00 h</span>
                     <h3 class="loc-name">Alquería Mascarós</h3>
                     <p class="loc-addr">Burriana<br>Castellón</p>
                     <a href="https://maps.google.com/?q=Alqueria+Mascaros+Burriana" target="_blank" rel="noopener"
@@ -1375,9 +1200,9 @@
     <!-- ── DIVISOR ONDULADO: lugares → confirmación ── -->
     <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--navy)" />
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
     </div>
 
@@ -1412,9 +1237,9 @@
     <!-- ── DIVISOR ONDULADO: confirmación → contacto ── -->
     <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="#FFFFFF" />
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
     </div>
 
@@ -1456,9 +1281,9 @@
     <!-- ── DIVISOR ONDULADO: contacto → regalo ── -->
     <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="#FAF7F1" />
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
     </div>
 
@@ -1486,29 +1311,80 @@
             <button class="copy-btn" onclick="openModalIban()" aria-label="Copiar número de cuenta">
                     Número de cuenta
                 </button>
-            <!--<div class="account-box reveal">
-                <span class="account-label">Número de cuenta</span>
-                <span class="account-num" id="iban">ESXX XXXX XXXX XXXX XXXX XXXX</span>
-                <button class="copy-btn" onclick="copyIban()" aria-label="Copiar número de cuenta">
-                    Copiar número
-                </button>
-            </div>-->
         </div>
     </section>
 
-    <!-- ── DIVISOR ONDULADO: regalo → footer ── -->
+    <!-- ── DIVISOR ONDULADO: regalo → cuenta atrás ── -->
     <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sage-light)"
-                opacity="0.6" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--navy)" />
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+        </svg>
+    </div>
+
+    <!-- ── CUENTA ATRÁS ───────────────────────────────────── -->
+    <section id="countdown">
+        <div class="section-inner">
+            <div class="cd-row">
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-days">--</span>
+                    <span class="cd-label">Días</span>
+                </div>
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-hours">--</span>
+                    <span class="cd-label">Horas</span>
+                </div>
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-minutes">--</span>
+                    <span class="cd-label">Min</span>
+                </div>
+                <div class="cd-item">
+                    <span class="cd-num" id="cd-seconds">--</span>
+                    <span class="cd-label">Seg</span>
+                </div>
+            </div>
+            <div class="cd-lower">
+                <div class="cd-lower-text">
+                    <h2 class="hero-names reveal">Os esperamos</h2>
+                    <p class="hero-date reveal">Miriam &amp; Borja</p>
+                </div>
+                <div class="cd-lower-img">
+                    <img src="imgs/background3.png" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── DIVISOR ONDULADO: cuenta atrás → foto ── -->
+    <div class="wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+        </svg>
+    </div>
+
+    <!-- ── FOTO ───────────────────────────────────────────── -->
+    <section id="couple-photo">
+        <div class="section-inner" style="text-align:center">
+            <img class="couple-photo-img reveal" src="imgs/borjamiriam.jpeg" alt="Miriam &amp; Borja">
+        </div>
+    </section>
+
+    <!-- ── DIVISOR ONDULADO: foto → footer ── -->
+    <div class="wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
+                opacity="0.55" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
     </div>
 
     <!-- ── FOOTER ─────────────────────────────────────────── -->
     <footer>
-        <p class="footer-names">Borja &amp; Miriam</p>
-        <p class="footer-date">11 · Octubre · 2026</p>
+        <p class="footer-names">Miriam &amp; Borja</p>
+        <p class="footer-date">11 de Octubre de 2026</p>
         <p class="footer-love">Hecho con amor ♡</p>
     </footer>
 
@@ -1517,7 +1393,7 @@
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="iban-modal-title">
             <button class="modal-close" onclick="closeModalIban()" aria-label="Cerrar">&times;</button>
             <h3 id="iban-modal-title" class="modal-title">Número de cuenta</h3>
-            <p class="modal-iban" id="modal-iban">ESXX XXXX XXXX XXXX XXXX XXXX</p>
+            <p class="modal-iban" id="modal-iban">ES25 0182 7218 2202 0170 4857</p>
             <button class="copy-btn" onclick="copyIban()">Copiar número</button>
         </div>
     </div>
@@ -1525,7 +1401,7 @@
 
     <script>
         /* ── CUENTA ATRÁS ────────────────────────────────── */
-        const weddingDate = new Date('2026-10-11T13:00:00');
+        const weddingDate = new Date('2026-10-11T12:00:00');
 
         function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -1560,15 +1436,36 @@
         /* ── COPIAR IBAN ─────────────────────────────────── */
         function copyIban() {
             const iban = document.getElementById('modal-iban').textContent.trim();
-            navigator.clipboard.writeText(iban).then(() => {
-                const btn = document.querySelector('#iban-modal-overlay .copy-btn');
+            const btn = document.querySelector('#iban-modal-overlay .copy-btn');
+
+            function showCopied() {
                 const original = btn.textContent;
                 btn.textContent = '¡Copiado!';
                 setTimeout(() => { btn.textContent = original; }, 2500);
-            }).catch(() => {
-                /* fallback si clipboard API no disponible */
-                alert('Número de cuenta: ' + iban);
-            });
+            }
+
+            function fallbackCopy() {
+                const textarea = document.createElement('textarea');
+                textarea.value = iban;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showCopied();
+                } catch (err) {
+                    alert('Número de cuenta: ' + iban);
+                }
+                document.body.removeChild(textarea);
+            }
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(iban).then(showCopied).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
         }
 
         /* ── MODAL IBAN ──────────────────────────────────── */

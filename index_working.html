@@ -969,6 +969,36 @@
                 text-align: center;
             }
         }
+
+        @font-face {
+            font-family: 'Font1';
+            src: url('fonts/Beyonest.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Font2';
+            src: url('fonts/FloristonePhidelphia.otf') format('opentype');
+        }
+
+        @font-face {
+            font-family: 'Font3';
+            src: url('fonts/Paragraph.otf') format('opentype');
+        }
+
+        .font1 {
+            font-family: 'Font1', sans-serif;
+        }
+
+        .font2 {
+            font-family: 'Font2', sans-serif !important;
+
+            font-weight: normal !important;
+            zoom: 150%;
+        }
+
+        .font3 {
+            font-family: 'Font3', sans-serif;
+        }
     </style>
 </head>
 
@@ -998,7 +1028,7 @@
     <section id="hero">
         <img class="hero-bg-img" src="imgs/background.png" alt="">
         <div class="hero-content">
-            <h1 class="hero-names">Miriam <span class="amp">&amp;</span> Borja</h1>
+            <h1 class="hero-names font1">Miriam <span class="amp">&amp;</span> Borja</h1>
             <p class="hero-date">11 de Octubre de 2026</p>
         </div>
     </section>
@@ -1008,7 +1038,8 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
@@ -1016,7 +1047,7 @@
     <section id="invitation">
         <div class="section-inner" style="text-align:center">
             <!--<span class="tag reveal">Con toda la alegría de nuestros corazones</span>-->
-            <h2 class="section-title reveal">Nos casamos!</h2>
+            <h2 class="section-title reveal font2">¡Nos casamos!</h2>
             <div class="ornament reveal">
                 <span class="ornament-icon" aria-hidden="true">
                     <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"
@@ -1029,6 +1060,9 @@
                 </span>
             </div>
             <p class="invite-body reveal">
+                Después de compartir muchos momentos, ha llegado el día de comenzar una nueva etapa.
+            </p>
+            <p class="invite-body reveal">
                 Y nos hace mucha ilusión compartirlo con las personas que formáis parte de nuestra vida.
             </p>
             <div class="ornament reveal">
@@ -1040,7 +1074,8 @@
                 </span>
             </div>
             <!--<p class="invite-sign reveal">Con todo nuestro amor, Borja &amp; Miriam</p>-->
-            <p class="invite-body reveal">Qué ganas de celebrarlo juntos</p>
+            <p class="invite-body reveal"><strong>Gracias por acompañarnos.</strong></p>
+            <p class="invite-body reveal"><strong>¡Estamos deseando celebrarlo juntos!</strong></p>
         </div>
     </section>
 
@@ -1049,7 +1084,8 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
@@ -1075,11 +1111,10 @@
                     <div class="tl-side tl-side-left">
                         <span class="tl-time">11:00h</span>
                         <p class="tl-event">Autobús</p>
-                        <p class="tl-desc">(Aprox)</p>
                     </div>
                     <div class="tl-dot"></div>
                     <div class="tl-side tl-side-right">
-                        <img class="tl-img" src="imgs/program6.png" alt="Autobús">
+                        <img class="tl-img" src="imgs/program1.png" alt="Autobús">
                     </div>
                 </div>
 
@@ -1104,14 +1139,14 @@
                     </div>
                     <div class="tl-dot"></div>
                     <div class="tl-side tl-side-right">
-                        <img class="tl-img" src="imgs/program6.png" alt="Autobús">
+                        <img class="tl-img" src="imgs/program1.png" alt="Autobús">
                     </div>
                 </div>
 
                 <!-- 4. Comida -->
                 <div class="tl-item left reveal">
                     <div class="tl-side tl-side-right">
-                        <img class="tl-img" src="imgs/program4.png" alt="Comida">
+                        <img class="tl-img" src="imgs/program3.png" alt="Comida">
                     </div>
                     <div class="tl-dot"></div>
                     <div class="tl-side tl-side-left">
@@ -1129,7 +1164,7 @@
                     </div>
                     <div class="tl-dot"></div>
                     <div class="tl-side tl-side-right">
-                        <img class="tl-img" src="imgs/program5.png" alt="Fiesta">
+                        <img class="tl-img" src="imgs/program4.png" alt="Fiesta">
                     </div>
                 </div>
             </div>
@@ -1141,7 +1176,8 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
@@ -1166,9 +1202,10 @@
                     <!--<span class="loc-emoji">🚌</span>-->
                     <img id="img_bus" src="imgs/bus.png" alt="">
                     <br>
-                    <span class="loc-type">Autobús · 11:00 h</span>
-                    <h3 class="loc-name">Punto de salida</h3>
-                    <p class="loc-addr">Salida del autobús<br>hacia la ceremonia</p>
+                    <!--                     <span class="loc-type">Autobús · 11:00 h</span>
+ -->
+                    <h3 class="loc-name">Puntos de salida</h3>
+                    <p class="loc-addr">Os concretaremos donde y cuando</p>
                     <div class="bus-btn-grid">
                         <a href="#" class="btn-outline">Valencia</a>
                         <a href="#" class="btn-outline">Betxí</a>
@@ -1205,7 +1242,8 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
@@ -1242,7 +1280,8 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
@@ -1265,12 +1304,14 @@
             <div class="contact-grid">
                 <div class="contact-card reveal">
                     <p class="contact-name">Borja</p>
+                    <br>
                     <a href="tel:+34678295600" class="contact-btn btn-call">📞 678 29 56 00</a>
                     <a href="https://wa.me/34678295600" target="_blank" rel="noopener" class="contact-btn btn-wa">💬
                         WhatsApp</a>
                 </div>
                 <div class="contact-card reveal">
                     <p class="contact-name">Miriam</p>
+                    <br>
                     <a href="tel:+34620754659" class="contact-btn btn-call">📞 620 75 46 59</a>
                     <a href="https://wa.me/34620754659" target="_blank" rel="noopener" class="contact-btn btn-wa">💬
                         WhatsApp</a>
@@ -1284,7 +1325,8 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
@@ -1310,8 +1352,8 @@
                 ¡Muchas gracias de corazón!
             </p>
             <button class="copy-btn" onclick="openModalIban()" aria-label="Copiar número de cuenta">
-                    Número de cuenta
-                </button>
+                Número de cuenta
+            </button>
         </div>
     </section>
 
@@ -1320,7 +1362,8 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
@@ -1348,23 +1391,24 @@
             <div class="cd-lower">
                 <div class="cd-lower-text">
                     <h2 class="hero-names reveal">Os esperamos</h2>
-                    <p class="hero-date reveal">Miriam &amp; Borja</p>
+                    <!--                     <p class="hero-date reveal">Miriam &amp; Borja</p>
+ -->
                 </div>
-                <div class="cd-lower-img">
+                <!-- <div class="cd-lower-img">
                     <img src="imgs/background3.png" alt="">
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
 
     <!-- ── DIVISOR ONDULADO: cuenta atrás → foto ── -->
-    <div class="wave-divider" aria-hidden="true">
+    <!-- <div class="wave-divider" aria-hidden="true">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
             <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
         </svg>
-    </div>
+    </div> -->
 
     <!-- ── FOTO ───────────────────────────────────────────── -->
     <section id="couple-photo">
@@ -1378,13 +1422,14 @@
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,45 C240,10 480,80 720,45 C960,10 1200,80 1440,45 L1440,120 L0,120 Z" fill="var(--sky)"
                 opacity="0.55" />
-            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)" opacity="0.35" />
+            <path d="M0,70 C240,105 480,40 720,75 C960,110 1200,45 1440,70 L1440,120 L0,120 Z" fill="var(--orange)"
+                opacity="0.35" />
         </svg>
     </div>
 
     <!-- ── FOOTER ─────────────────────────────────────────── -->
     <footer>
-        <p class="footer-names">Miriam &amp; Borja</p>
+        <p class="footer-names font3">Miriam &amp; Borja</p>
         <p class="footer-date">11 de Octubre de 2026</p>
         <p class="footer-love">Hecho con amor ♡</p>
     </footer>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" translate="no">
-<!---->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -246,7 +246,7 @@
         }
 
         .cd-num {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: clamp(2.4rem, 6vw, 4rem);
             color: var(--orange);
             display: block;
@@ -844,6 +844,33 @@
             margin-bottom: 1.5rem;
         }
 
+        /* ─── MODAL (Puntos de salida) ───────────────────── */
+        .modal-lg {
+            max-width: 440px;
+            max-height: 90vh;
+            overflow: hidden auto;
+            background: var(--cream-soft);
+        }
+
+        .modal-lg .modal-title {
+            font-size: 2.25rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 0.9rem;
+        }
+
+        .modal-body p:last-child {
+            margin-bottom: 1.3rem;
+        }
+
+        .modal-photo {
+            display: block;
+            width: calc(100% + 4rem);
+            height: auto;
+            margin: 1.3rem -2rem -2rem;
+        }
+
         /* ─── FOTO PAREJA ───────────────────────────────── */
         #couple-photo {
             text-align: center;
@@ -1018,6 +1045,7 @@
 
         .font3 {
             font-family: 'Font3', sans-serif;
+            zoom: 150%;
         }
     </style>
 </head>
@@ -1128,7 +1156,7 @@ Y junto a nuestras familias, tenemos la ilusión de invitaros a compartir este d
                 <!-- 1. Autobús -->
                 <div class="tl-item right reveal">
                     <div class="tl-side tl-side-left">
-                        <span class="tl-time">11:00h</span>
+                        <!--<span class="tl-time">11:00h</span>-->
                         <p class="tl-event">Autobús</p>
                     </div>
                     <div class="tl-dot"></div>
@@ -1158,7 +1186,7 @@ Y junto a nuestras familias, tenemos la ilusión de invitaros a compartir este d
                     </div>
                     <div class="tl-dot"></div>
                     <div class="tl-side tl-side-right">
-                        <img class="tl-img" src="imgs/program1.png" alt="Autobús">
+                        <img class="tl-img" src="imgs/program1.1.png" alt="Autobús">
                     </div>
                 </div>
 
@@ -1224,12 +1252,11 @@ Y junto a nuestras familias, tenemos la ilusión de invitaros a compartir este d
                     <!--                     <span class="loc-type">Autobús · 11:00 h</span>
  -->
                     <h3 class="loc-name">Puntos de salida</h3>
-                    <p class="loc-addr">Os concretaremos donde y cuando</p>
                     <div class="bus-btn-grid">
-                        <a href="#" class="btn-outline">Valencia</a>
-                        <a href="#" class="btn-outline">Betxí</a>
-                        <a href="#" class="btn-outline">Onda</a>
-                        <a href="#" class="btn-outline">Sagunto</a>
+                        <a href="#" class="btn-outline" onclick="openBusModal('valencia');return false;">Valencia</a>
+                        <a href="#" class="btn-outline" onclick="openBusModal('betxi');return false;">Betxí</a>
+                        <a href="#" class="btn-outline" onclick="openBusModal('onda');return false;">Onda</a>
+                        <a href="#" class="btn-outline" onclick="openBusModal('sagunto');return false;">Sagunto</a>
                     </div>
                 </div>
                 <div class="loc-card reveal">
@@ -1409,7 +1436,7 @@ Y junto a nuestras familias, tenemos la ilusión de invitaros a compartir este d
             </div>
             <div class="cd-lower">
                 <div class="cd-lower-text">
-                    <h2 class="hero-names reveal">Os esperamos</h2>
+                    <h2 class="hero-names reveal font2">Os esperamos</h2>
                     <!--                     <p class="hero-date reveal">Miriam &amp; Borja</p>
  -->
                 </div>
@@ -1460,6 +1487,17 @@ Y junto a nuestras familias, tenemos la ilusión de invitaros a compartir este d
             <h3 id="iban-modal-title" class="modal-title">Número de cuenta</h3>
             <p class="modal-iban" id="modal-iban">ES25 0182 7218 2202 0170 4857</p>
             <button class="copy-btn" onclick="copyIban()">Copiar número</button>
+        </div>
+    </div>
+
+    <!-- ── MODAL: Puntos de salida ─────────────────────────── -->
+    <div class="modal-overlay" id="bus-modal-overlay" aria-hidden="true">
+        <div class="modal modal-lg" role="dialog" aria-modal="true" aria-labelledby="bus-modal-title">
+            <button class="modal-close" onclick="closeBusModal()" aria-label="Cerrar">&times;</button>
+            <h3 id="bus-modal-title" class="modal-title font2"></h3>
+            <div id="bus-modal-body" class="invite-body modal-body"></div>
+            <a id="bus-modal-map" href="#" target="_blank" rel="noopener" class="btn-outline">Ver en el mapa</a>
+            <img id="bus-modal-photo" class="modal-photo" src="" alt="">
         </div>
     </div>
 
@@ -1545,8 +1583,60 @@ Y junto a nuestras familias, tenemos la ilusión de invitaros a compartir este d
         document.getElementById('iban-modal-overlay').addEventListener('click', (e) => {
             if (e.target.id === 'iban-modal-overlay') closeModalIban();
         });
+
+        /* ── MODAL PUNTOS DE SALIDA ───────────────────────── */
+        const busStops = {
+            valencia: {
+                title: 'Valencia',
+                bodyHTML: '<p>La salida del autobús desde <strong>Valencia</strong> está prevista aproximadamente a las <strong>10:45 horas</strong>.</p>' +
+                    '<p>Esta información es únicamente orientativa. La hora definitiva y el punto exacto de recogida se confirmarán una vez finalice la asignación de plazas y la planificación de las rutas.</p>' +
+                    '<p>Agradecemos vuestra comprensión y os recomendamos consultar esta página antes del viaje para comprobar la información actualizada.</p>',
+                mapUrl: 'https://maps.google.com/?q=Centro+de+Valencia,+España',
+                img: 'imgs/valencia.png'
+            },
+            betxi: {
+                title: 'Betxí',
+                bodyHTML: '<p>La salida del autobús desde <strong>Betxí</strong> está prevista aproximadamente a las <strong>10:45 horas</strong> desde la parada del <strong>Auditori de Betxí</strong>.</p>',
+                mapUrl: 'https://www.google.com/maps/place/Av.+Joaquim+Dualde,+10/@39.9289024,-0.1966364,20.33z/data=!4m14!1m7!3m6!1s0xd600910081d3a9f:0xb83bf5b838530e9c!2sTeatre+Municipal+de+Betx%C3%AD!8m2!3d39.9290976!4d-0.1963246!16s%2Fg%2F11xv93q3w!3m5!1s0xd60091008223daf:0xa51cd3c1e67593a5!8m2!3d39.9289871!4d-0.1963577!16s%2Fg%2F11swy63gf3?entry=ttu&g_ep=EgoyMDI2MDgwNS4xIKXMDSoASAFQAw%3D%3D',
+                img: 'imgs/betxi.png'
+            },
+            onda: {
+                title: 'Onda',
+                bodyHTML: '<p>La salida del autobús desde <strong>Onda</strong> está prevista aproximadamente a las <strong>10:45 horas</strong>.</p>' +
+                    '<p>Esta información es únicamente orientativa. La hora definitiva y el punto exacto de recogida se confirmarán una vez finalice la asignación de plazas y la planificación de las rutas.</p>' +
+                    '<p>Agradecemos vuestra comprensión y os recomendamos consultar esta página antes del viaje para comprobar la información actualizada.</p>',
+                mapUrl: 'https://maps.google.com/?q=Centro+de+Onda,+Castellón',
+                img: 'imgs/onda.png'
+            },
+            sagunto: {
+                title: 'Sagunto',
+                bodyHTML: '<p>Una vez finalizada la ceremonia, los autobuses con destino al lugar del convite saldrán de este punto.</p>' +
+                    '<p>La salida está prevista aproximadamente a las <strong>13:30 h</strong>, aunque el horario podrá ajustarse ligeramente en función de la duración de la ceremonia.</p>',
+                mapUrl: 'https://maps.app.goo.gl/xwqyMG4eQmu9ph8JA',
+                img: 'imgs/sagunt.png'
+            }
+        };
+
+        function openBusModal(key) {
+            const stop = busStops[key];
+            document.getElementById('bus-modal-title').textContent = stop.title;
+            document.getElementById('bus-modal-body').innerHTML = stop.bodyHTML;
+            document.getElementById('bus-modal-map').href = stop.mapUrl;
+            document.getElementById('bus-modal-photo').src = stop.img;
+            document.getElementById('bus-modal-photo').alt = stop.title;
+            document.getElementById('bus-modal-overlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeBusModal() {
+            document.getElementById('bus-modal-overlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('bus-modal-overlay').addEventListener('click', (e) => {
+            if (e.target.id === 'bus-modal-overlay') closeBusModal();
+        });
+
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModalIban();
+            if (e.key === 'Escape') { closeModalIban(); closeBusModal(); }
         });
     </script>
 </body>
